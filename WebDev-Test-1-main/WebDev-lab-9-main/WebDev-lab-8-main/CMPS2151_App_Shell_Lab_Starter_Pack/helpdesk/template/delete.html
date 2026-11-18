@@ -1,0 +1,16 @@
+{{define "content"}}
+<section class="page">
+  <p><a class="back-link" href="/tickets/{{.Ticket.ID}}">← Back to ticket</a></p>
+
+  <h1>Delete ticket #{{.Ticket.ID}}?</h1>
+  <p><strong>{{.Ticket.Title}}</strong></p>
+  <p>{{.Ticket.LocationName}} ({{.Ticket.LocationCode}}) · {{.Ticket.CategoryName}}</p>
+
+  <p class="warning">This permanently removes the ticket.</p>
+
+  <form method="post" action="/tickets/{{.Ticket.ID}}/delete" class="actions">
+    <button type="submit" class="btn btn-danger">Yes, delete ticket</button>
+    <a class="btn btn-link" href="/tickets/{{.Ticket.ID}}">Cancel</a>
+  </form>
+</section>
+{{end}}

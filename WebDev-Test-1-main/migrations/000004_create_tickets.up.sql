@@ -1,4 +1,4 @@
-CREATE TABLE tickets (
+CREATE TABLE IF NOT EXISTS tickets (
     id SERIAL PRIMARY KEY,
     title TEXT NOT NULL CHECK (length(title) > 0),
     description TEXT NOT NULL,

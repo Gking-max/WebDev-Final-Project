@@ -1,0 +1,85 @@
+{{define "content"}}
+<section class="page">
+  <p><a class="back-link" href="{{if .IsCreate}}/tickets{{else}}/tickets/{{.Ticket.ID}}{{end}}">← Back</a></p>
+
+  <h1>{{if .IsCreate}}New ticket{{else}}Edit ticket #{{.Ticket.ID}}{{end}}</h1>
+
+  <form method="post" action="{{.Action}}" class="form-card" novalidate>
+    <div class="field">
+      <label for="title">Title</label>
+      <input id="title" name="title" type="text" value="{{.Ticket.Title}}" required>
+      {{with .Errors.title}}<p class="error">{{.}}</p>{{end}}
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="requester_name">Requester name</label>
+        <input id="requester_name" name="requester_name" type="text" value="{{.Ticket.RequesterName}}" required>
+        {{with .Errors.requester_name}}<p class="error">{{.}}</p>{{end}}
+      </div>
+      <div class="field">
+        <label for="requester_type">Requester type</label>
+        <select id="requester_type" name="requester_type" required>
+          {{$rt := .Ticket.RequesterType}}
+          <option value="">Choose…</option>
+          <option value="Student" {{if eq $rt "Student"}}selected{{end}}>Student</option>
+          <option value="Faculty" {{if eq $rt "Faculty"}}selected{{end}}>Faculty</option>
+          <option value="Staff"   {{if eq $rt "Staff"}}selected{{end}}>Staff</option>
+        </select>
+        {{with .Errors.requester_type}}<p class="error">{{.}}</p>{{end}}
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="location_name">Location name</label>
+        <input id="location_name" name="location_name" type="text" value="{{.Ticket.LocationName}}" required>
+        {{with .Errors.location_name}}<p class="error">{{.}}</p>{{end}}
+      </div>
+      <div class="field">
+        <label for="location_code">Location code</label>
+        <input id="location_code" name="location_code" type="text" value="{{.Ticket.LocationCode}}" required>
+        {{with .Errors.location_code}}<p class="error">{{.}}</p>{{end}}
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="status_id">Status</label>
+        <select id="status_id" name="status_id" required>
+          {{$sid := .Ticket.StatusID}}
+          {{range .Statuses}}<option value="{{.ID}}" {{if eq .ID $sid}}selected{{end}}>{{.Name}}</option>{{end}}
+        </select>
+        {{with .Errors.status_id}}<p class="error">{{.}}</p>{{end}}
+      </div>
+      <div class="field">
+        <label for="priority_id">Priority</label>
+        <select id="priority_id" name="priority_id" required>
+          {{$pid := .Ticket.PriorityID}}
+          {{range .Priorities}}<option value="{{.ID}}" {{if eq .ID $pid}}selected{{end}}>{{.Name}}</option>{{end}}
+        </select>
+        {{with .Errors.priority_id}}<p class="error">{{.}}</p>{{end}}
+      </div>
+      <div class="field">
+        <label for="category_id">Category</label>
+        <select id="category_id" name="category_id" required>
+          {{$cid := .Ticket.CategoryID}}
+          {{range .Categories}}<option value="{{.ID}}" {{if eq .ID $cid}}selected{{end}}>{{.Name}}</option>{{end}}
+        </select>
+        {{with .Errors.category_id}}<p class="error">{{.}}</p>{{end}}
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="5" required>{{.Ticket.Description}}</textarea>
+      {{with .Errors.description}}<p class="error">{{.}}</p>{{end}}
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn btn-primary">{{if .IsCreate}}Create ticket{{else}}Save changes{{end}}</button>
+      <a class="btn btn-link" href="{{if .IsCreate}}/tickets{{else}}/tickets/{{.Ticket.ID}}{{end}}">Cancel</a>
+    </div>
+  </form>
+</section>
+{{end}}
