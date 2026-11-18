@@ -213,12 +213,14 @@ func (a *App) renderForm(w http.ResponseWriter, r *http.Request, status int, t T
 		return
 	}
 	action := "/tickets/create"
+	active := "new"
 	if !isCreate {
 		action = fmt.Sprintf("/tickets/%d/edit", t.ID)
+		active = "tickets"
 	}
 	a.render(w, status, "form.html", map[string]any{
 		"Ticket": t, "Errors": errs, "IsCreate": isCreate, "Action": action,
-		"Statuses": statuses, "Priorities": priorities, "Categories": categories, "Active": "tickets",
+		"Statuses": statuses, "Priorities": priorities, "Categories": categories, "Active": active,
 	})
 }
 

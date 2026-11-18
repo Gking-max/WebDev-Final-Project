@@ -24,12 +24,12 @@
         <ul class="navigation-list">
           <li>
             <a class="navigation-link" href="/tickets" {{if eq .Active "tickets"}}aria-current="page"{{end}}>
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6v3H9z"/><path d="M15 4.5h3a2 2 0 012 2V20a2 2 0 01-2 2H6a2 2 0 01-2-2V6.5a2 2 0 012-2h3"/><path d="M8 12h8M8 16h8"/></svg>
               <span>All tickets</span>
             </a>
           </li>
           <li>
-            <a class="navigation-link" href="/tickets/create">
+            <a class="navigation-link" href="/tickets/create" {{if eq .Active "new"}}aria-current="page"{{end}}>
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
               <span>New ticket</span>
             </a>

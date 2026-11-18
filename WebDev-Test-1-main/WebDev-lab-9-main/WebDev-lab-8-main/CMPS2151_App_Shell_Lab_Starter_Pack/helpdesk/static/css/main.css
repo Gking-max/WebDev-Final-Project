@@ -1,12 +1,6 @@
 /* ============================================================================
-   CMPS2151 — App Shell Transfer Lab
-   ----------------------------------------------------------------------------
-   Build the App Shell for your chosen mockup in this file.
-
-   Do not change reset.css.
-   Use the values already provided in token.css.
-
-   IMPORTANT: The <main> element must remain EMPTY.
+   CMPS2151 — HelpDesk (brief says "reports"; this domain calls them "tickets")
+   Load order: reset.css -> token.css -> main.css
    ========================================================================== */
 
 /* 1. Page / shell ---------------------------------------------------------- */
@@ -39,13 +33,9 @@
    padding: 0 8px 30px;
 }
 
-.brand-block > svg {
-   flex: 0 0 auto;
-}
+.brand-block > svg { flex: 0 0 auto; }
 
-.brand-copy {
-   min-width: 0;
-}
+.brand-copy { min-width: 0; }
 
 .brand-name {
    font-size: 21px;
@@ -62,9 +52,7 @@
 
 /* 4. Navigation links and active state ----------------------------------- */
 
-.primary-navigation {
-   min-height: 0;
-}
+.primary-navigation { min-height: 0; }
 
 .navigation-list {
    display: grid;
@@ -85,13 +73,9 @@
    text-decoration: none;
 }
 
-.navigation-link > svg {
-   flex: 0 0 24px;
-}
+.navigation-link > svg { flex: 0 0 24px; }
 
-.navigation-link:hover {
-   background: var(--rail-hover);
-}
+.navigation-link:hover { background: var(--rail-hover); }
 
 .navigation-link:focus-visible {
    outline: 2px solid var(--rail-text);
@@ -133,9 +117,7 @@
    gap: 12px;
 }
 
-.user-name {
-   font-size: 15px;
-}
+.user-name { font-size: 15px; }
 
 .user-chevron {
    width: 8px;
@@ -160,8 +142,340 @@
 }
 
 /* 8. Main content slot ---------------------------------------------------- */
-/* The main element stays EMPTY in HTML. Style only its place in the shell. */
 
 .workspace {
    min-width: 0;
+   overflow-wrap: break-word;
+}
+
+/* ============================================================================
+   PAGE LAYOUT
+   ========================================================================== */
+
+.page {
+   max-width: 900px;
+   margin: 0 auto;
+   padding: 32px;
+   display: grid;
+   gap: 24px;
+}
+
+.page-header {
+   display: flex;
+   align-items: flex-start;
+   justify-content: space-between;
+   gap: 16px;
+   flex-wrap: wrap;
+}
+
+.page-subtitle {
+   margin-top: 4px;
+   color: var(--text-muted);
+   font-size: 15px;
+}
+
+.kicker {
+   color: var(--text-muted);
+   font-size: 13px;
+   text-transform: uppercase;
+   letter-spacing: 0.04em;
+   margin-bottom: 6px;
+}
+
+.back-link {
+   color: var(--accent);
+   text-decoration: none;
+   font-size: 15px;
+}
+
+.back-link:hover { text-decoration: underline; }
+
+/* ============================================================================
+   BUTTONS
+   ========================================================================== */
+
+.actions {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 12px;
+   align-items: center;
+}
+
+.btn {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   gap: 8px;
+   min-height: 44px;
+   padding: 0 18px;
+   border-radius: 8px;
+   border: 1px solid transparent;
+   font-size: 15px;
+   font-weight: 600;
+   text-decoration: none;
+   cursor: pointer;
+}
+
+.btn:focus-visible {
+   outline: 2px solid var(--accent);
+   outline-offset: 2px;
+}
+
+.btn-primary {
+   background: var(--accent);
+   color: var(--rail-text);
+}
+
+.btn-primary:hover { background: var(--accent-hover); }
+
+.btn-danger {
+   background: transparent;
+   color: oklch(0.480 0.180 25);
+   border-color: oklch(0.700 0.150 25);
+}
+
+.btn-danger:hover { background: oklch(0.960 0.030 25); }
+
+.btn-link {
+   background: transparent;
+   color: var(--accent);
+}
+
+.btn-link:hover { text-decoration: underline; }
+
+/* ============================================================================
+   LIST PAGE
+   ========================================================================== */
+
+.ticket-list {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+   display: grid;
+   gap: 0;
+   border: 1px solid var(--border);
+   border-radius: 12px;
+   overflow: hidden;
+   background: var(--surface);
+}
+
+.ticket-list > li + li .ticket-row {
+   border-top: 1px solid var(--border);
+}
+
+.ticket-row {
+   display: grid;
+   grid-template-columns: auto minmax(0, 1fr) auto;
+   align-items: center;
+   gap: 16px;
+   padding: 16px 20px;
+   text-decoration: none;
+   color: var(--text-primary);
+   background: var(--surface);
+}
+
+.ticket-row:hover { background: oklch(0.975 0.008 255); }
+
+.ticket-row:focus-visible {
+   outline: 2px solid var(--accent);
+   outline-offset: -2px;
+}
+
+.lead {
+   font-size: 14px;
+   color: var(--text-muted);
+   font-variant-numeric: tabular-nums;
+   flex: 0 0 auto;
+}
+
+.row-text {
+   display: grid;
+   gap: 2px;
+   min-width: 0;
+}
+
+.ticket-title {
+   font-size: 16px;
+   font-weight: 600;
+   color: var(--text-primary);
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+
+.ticket-meta {
+   font-size: 14px;
+   color: var(--text-muted);
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+
+.row-trail {
+   display: grid;
+   grid-auto-flow: column;
+   align-items: center;
+   gap: 12px;
+}
+
+.chevron {
+   width: 8px;
+   height: 8px;
+   border-right: 2px solid var(--text-muted);
+   border-bottom: 2px solid var(--text-muted);
+   transform: rotate(-45deg);
+}
+
+.empty-state {
+   padding: 32px;
+   text-align: center;
+   border: 1px dashed var(--border);
+   border-radius: 12px;
+   color: var(--text-muted);
+}
+
+.empty-state a { color: var(--accent); }
+
+/* ============================================================================
+   STATUS PILL
+   ========================================================================== */
+
+.pill {
+   display: inline-grid;
+   grid-auto-flow: column;
+   align-items: center;
+   gap: 0.4em;
+   padding: 0.25em 0.75em;
+   border-radius: 999px;
+   font-size: 13px;
+   font-weight: 600;
+   white-space: nowrap;
+   background: oklch(0.930 0.020 255);
+   color: var(--text-primary);
+}
+
+.pill::before {
+   content: "";
+   width: 0.6em;
+   height: 0.6em;
+   border-radius: 50%;
+   background: currentColor;
+}
+
+/* Status modifiers — match statusMod() output in handlers.go */
+.pill-new              { background: oklch(0.930 0.040 255); color: oklch(0.380 0.150 255); }
+.pill-assigned         { background: oklch(0.930 0.050 230); color: oklch(0.380 0.130 230); }
+.pill-in-progress      { background: oklch(0.930 0.070 90);  color: oklch(0.420 0.130 90);  }
+.pill-waiting-for-you  { background: oklch(0.930 0.070 50);  color: oklch(0.450 0.150 50);  }
+.pill-resolved         { background: oklch(0.930 0.060 150); color: oklch(0.380 0.130 150); }
+.pill-closed           { background: oklch(0.920 0.010 255); color: oklch(0.400 0.010 255); }
+
+/* ============================================================================
+   FORMS
+   ========================================================================== */
+
+.form-card {
+   display: grid;
+   gap: 20px;
+   padding: 24px;
+   border: 1px solid var(--border);
+   border-radius: 12px;
+   background: var(--surface);
+}
+
+.field { display: grid; gap: 6px; min-width: 0; }
+
+.field-row {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   gap: 20px;
+}
+
+.field label {
+   font-size: 14px;
+   font-weight: 600;
+   color: var(--text-primary);
+}
+
+.field input,
+.field select,
+.field textarea {
+   width: 100%;
+   padding: 10px 12px;
+   border: 1px solid var(--border);
+   border-radius: 8px;
+   background: var(--surface);
+   color: var(--text-primary);
+   font-size: 15px;
+}
+
+.field textarea { resize: vertical; min-height: 120px; }
+
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+   outline: 2px solid var(--accent);
+   outline-offset: 1px;
+   border-color: var(--accent);
+}
+
+.error {
+   font-size: 13px;
+   color: oklch(0.480 0.180 25);
+}
+
+.warning {
+   color: oklch(0.450 0.170 25);
+   font-weight: 600;
+}
+
+/* ============================================================================
+   DETAILS PAGE
+   ========================================================================== */
+
+.detail-grid {
+   display: grid;
+   grid-template-columns: max-content minmax(0, 1fr);
+   gap: 12px 24px;
+   padding: 24px;
+   border: 1px solid var(--border);
+   border-radius: 12px;
+   background: var(--surface);
+}
+
+.detail-grid dt {
+   font-size: 14px;
+   font-weight: 600;
+   color: var(--text-muted);
+}
+
+.detail-grid dd { margin: 0; min-width: 0; }
+
+.detail-grid code {
+   font-family: ui-monospace, Menlo, Consolas, monospace;
+   font-size: 13px;
+   background: oklch(0.960 0.008 255);
+   padding: 1px 5px;
+   border-radius: 4px;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 720px) {
+   .page { padding: 20px; }
+   .topbar { padding: 0 20px; }
+   .ticket-row {
+      grid-template-columns: auto minmax(0, 1fr);
+      grid-template-areas:
+         "lead text"
+         "trail trail";
+      row-gap: 10px;
+   }
+   .lead       { grid-area: lead; }
+   .row-text   { grid-area: text; }
+   .row-trail  { grid-area: trail; justify-content: flex-start; }
+   .detail-grid { grid-template-columns: 1fr; gap: 4px 0; }
+   .detail-grid dt { margin-top: 10px; }
 }
