@@ -13,6 +13,6 @@ CREATE TABLE IF NOT EXISTS tickets (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE INDEX idx_tickets_status_id ON tickets(status_id);
-CREATE INDEX idx_tickets_priority_id ON tickets(priority_id);
-CREATE INDEX idx_tickets_category_id ON tickets(category_id);
+CREATE INDEX IF NOT EXISTS idx_tickets_status_id   ON tickets(status_id);
+CREATE INDEX IF NOT EXISTS idx_tickets_priority_id ON tickets(priority_id);
+CREATE INDEX IF NOT EXISTS idx_tickets_category_id ON tickets(category_id);
